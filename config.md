@@ -131,6 +131,24 @@ encapsulation dot1Q 50
 ip address 192.168.50.1 255.255.255.0
 end
 ```
+R2
+```
+ena
+conf t
+int g0/1
+no shut
+int g0/2
+no shut
+exit
+int g0/1.60
+encapsulation dot1Q 60
+ip address 192.168.60.1 255.255.255.0
+exit
+int g0/2.70
+encapsulation dot1Q 70
+ip address 192.168.70.1 255.255.255.0
+end
+```
 SW1
 ```
 ena
@@ -202,6 +220,125 @@ no shutdown
 int fa0/4
 switchport mode access
 switchport access vlan 20
+no shutdown
+end
+```
+SW2
+```
+ena
+conf t
+hostname SW2
+vlan 30
+vlan 40
+vlan 50
+exit 
+interface fa0/1
+switchport mode trunk
+switchport trunk allowed vlan 30,40,50
+no shutdown
+interface fa0/4
+switchport mode trunk
+switchport trunk allowed vlan 30
+no shutdown
+interface fa0/5
+switchport mode trunk
+switchport trunk allowed vlan 40
+no shutdown
+interface fa0/6
+switchport mode trunk
+switchport trunk allowed vlan 50
+no shutdown
+end
+```
+SW5
+```
+ena
+conf t
+hostname SW5
+vlan 30
+
+! Cổng nối đến Switch2
+int fa0/2
+switchport mode trunk
+switchport trunk allowed vlan 30
+no shutdown
+
+! Cổng nối đến PC1
+int fa0/3
+switchport mode access
+switchport access vlan 30
+no shutdown
+
+! Cổng nối đến PC2
+int fa0/4
+switchport mode access
+switchport access vlan 30
+no shutdown
+end
+```
+SW6
+```
+ena
+conf t
+hostname SW6
+vlan 40
+
+! Cổng nối đến Switch2
+int fa0/2
+switchport mode trunk
+switchport trunk allowed vlan 40
+no shutdown
+
+! Cổng nối đến PC1
+int fa0/3
+switchport mode access
+switchport access vlan 40
+no shutdown
+
+! Cổng nối đến PC2
+int fa0/4
+switchport mode access
+switchport access vlan 40
+no shutdown
+end
+```
+SW7
+```
+ena
+conf t
+hostname SW7
+vlan 60
+
+! Cổng nối đến Switch2
+int fa0/1
+switchport mode trunk
+switchport trunk allowed vlan 60
+no shutdown
+
+! Cổng nối đến server
+int fa0/2
+switchport mode access
+switchport access vlan 60
+no shutdown
+end
+```
+SW8
+```
+ena
+conf t
+hostname SW8
+vlan 70
+
+! Cổng nối đến Switch2
+int fa0/1
+switchport mode trunk
+switchport trunk allowed vlan 70
+no shutdown
+
+! Cổng nối đến server
+int fa0/2
+switchport mode access
+switchport access vlan 70
 no shutdown
 end
 ```
