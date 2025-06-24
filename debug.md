@@ -58,3 +58,27 @@ show spanning-tree vlan 10
 ```
 📋 Xác minh VLAN đó đang forward hay bị blocking bởi STP.
 ### 🧠 Lưu ý
+#### 📜 I. Kiểm tra VLAN trên Switch
+```
+show vlan brief
+show interfaces trunk
+show interfaces fa0/x switchport
+show spanning-tree vlan [ID]
+```
+#### 📜 II. Kiểm tra địa chỉ IP & cổng Router
+```
+show ip interface brief
+show running-config interface g0/x.y
+show interface g0/x
+```
+#### 📜 III. Kiểm tra định tuyến (OSPF, route)
+```
+show ip route
+show ip protocols
+show ip ospf neighbor
+```
+#### 📜 IV. Kiểm tra ARP
+```
+show ip arp
+clear arp-cache
+```
