@@ -94,3 +94,85 @@ show ip route ospf            → Kiểm tra các route học được qua OSPF
 show ip protocols             → Xác nhận cấu hình OSPF
 show ip ospf interface brief  → Xem interface nào đang chạy OSPF
 ```
+## config vlan
+R1
+```
+ena
+conf t
+int g0/1
+no shut
+exit
+int g0/1.10
+encapsulation dot1Q 10
+ip address 192.168.10.1 255.255.255.0
+exit
+int g0/1.20
+encapsulation dot1Q 20
+ip address 192.168.20.1 255.255.255.0
+end
+```
+R2
+```
+ena
+conf t
+int g0/1
+no shut
+exit
+int g0/1.30
+encapsulation dot1Q 30
+ip address 192.168.30.1 255.255.255.0
+exit
+int g0/1.40
+encapsulation dot1Q 40
+ip address 192.168.40.1 255.255.255.0
+exit
+int g0/1.50
+encapsulation dot1Q 50
+ip address 192.168.50.1 255.255.255.0
+end
+```
+SW1
+```
+ena
+conf t
+hostname SW1
+interface fa0/1
+switchport mode trunk
+no shutdown
+interface fa0/2
+switchport mode trunk
+no shutdown
+end
+```
+SW3
+```
+ena
+conf t
+hostname SW3
+vlan 10
+vlan 20
+
+! Cổng nối đến Switch1
+int fa0/1
+switchport mode trunk
+no shutdown
+
+! Cổng nối đến PC1
+int fa0/3
+switchport mode access
+switchport access vlan 10
+no shutdown
+
+! Cổng nối đến PC2
+int fa0/4
+switchport mode access
+switchport access vlan 20
+no shutdown
+end
+```
+##   NOTE
+### Vlan
+chỉ mặc định cho vlan 10, những vlan còn lại cấmcấm
+```
+switchport trunk allowed vlan 10
+```
