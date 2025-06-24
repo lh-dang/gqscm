@@ -364,6 +364,35 @@ ip nat inside source list 1 interface G0/0 overload
 ip route 0.0.0.0 0.0.0.0 192.168.1.1
 end
 ```
+## Thêm Vlan vào ospf, không cấu hình NAT
+### R1 - Thêm Vlan 10,20 vào ospf
+```
+ena
+conf t
+router ospf 1
+network 192.168.10.0 0.0.0.255 area 0
+network 192.168.20.0 0.0.0.255 area 0
+end
+```
+### R2 - Thêm Vlan 30,40,50 vào ospf
+```
+ena
+conf t
+router ospf 1
+network 192.168.30.0 0.0.0.255 area 0
+network 192.168.40.0 0.0.0.255 area 0
+network 192.168.50.0 0.0.0.255 area 0
+end
+```
+### R2 - Thêm Vlan 60,70 vào ospf
+```
+ena
+conf t
+router ospf 1
+network 192.168.60.0 0.0.0.255 area 0
+network 192.168.70.0 0.0.0.255 area 0
+end
+```
 ##   NOTE
 ### Vlan
 chỉ mặc định cho vlan 10, những vlan còn lại cấm
