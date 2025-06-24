@@ -136,11 +136,20 @@ SW1
 ena
 conf t
 hostname SW1
+vlan 10
+vlan 20
+exit 
 interface fa0/1
 switchport mode trunk
+switchport trunk allowed vlan 10,20
 no shutdown
 interface fa0/2
 switchport mode trunk
+switchport trunk allowed vlan 10
+no shutdown
+interface fa0/3
+switchport mode trunk
+switchport trunk allowed vlan 20
 no shutdown
 end
 ```
@@ -150,11 +159,11 @@ ena
 conf t
 hostname SW3
 vlan 10
-vlan 20
 
 ! Cổng nối đến Switch1
 int fa0/1
 switchport mode trunk
+switchport trunk allowed vlan 10
 no shutdown
 
 ! Cổng nối đến PC1
@@ -166,13 +175,39 @@ no shutdown
 ! Cổng nối đến PC2
 int fa0/4
 switchport mode access
+switchport access vlan 10
+no shutdown
+end
+```
+SW4
+```
+ena
+conf t
+hostname SW4
+vlan 20
+
+! Cổng nối đến Switch1
+int fa0/1
+switchport mode trunk
+switchport trunk allowed vlan 20
+no shutdown
+
+! Cổng nối đến PC1
+int fa0/3
+switchport mode access
+switchport access vlan 20
+no shutdown
+
+! Cổng nối đến PC2
+int fa0/4
+switchport mode access
 switchport access vlan 20
 no shutdown
 end
 ```
 ##   NOTE
 ### Vlan
-chỉ mặc định cho vlan 10, những vlan còn lại cấmcấm
+chỉ mặc định cho vlan 10, những vlan còn lại cấm
 ```
 switchport trunk allowed vlan 10
 ```
