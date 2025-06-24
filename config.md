@@ -342,7 +342,7 @@ switchport access vlan 70
 no shutdown
 end
 ```
-## Cấu hình NAT Overload (PAT)
+## Cấu hình NAT Overload (PAT) -- không cấu hình phần 
 ### R1
 ```
 ena
