@@ -1,4 +1,12 @@
-## config ip addressMore actions
+![image](https://github.com/user-attachments/assets/b36394c7-c4ce-4674-aeaf-e2c563b6f79a)
+## Gồm
+- 8 Switch 2960-24TT
+- 4 Router 2911
+- 1 AC-PT: phat wifi
+- 8 PC
+- 2 laptop k/n wifi
+- 2 server (dns-web)
+## config ip address
 ### R0
 ```
 ena
