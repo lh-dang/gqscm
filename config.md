@@ -393,6 +393,50 @@ network 192.168.60.0 0.0.0.255 area 0
 network 192.168.70.0 0.0.0.255 area 0
 end
 ```
+## Cấu hình Access_point-PT
+📡 2. Cấu hình Access Point (AC-PT):
+Bấm vào Access Point
+
+Vào tab Config
+
+Chọn mục Wireless0
+
+Cấu hình:
+
+SSID: ví dụ MyWiFi
+
+Authentication: chọn WPA2-PSK
+
+Pass Phrase: ví dụ 12345678
+
+IP Address: ví dụ 192.168.1.2
+
+Subnet Mask: 255.255.255.0
+
+Default Gateway: 192.168.1.1 (IP router)
+
+💻 3. Cấu hình Laptop (kết nối WiFi):
+Bấm vào Laptop
+
+Vào tab Physical
+
+Tắt máy (power off)
+
+Kéo module PC Wireless (PC Wireless-N) vào slot
+
+Bật máy lại
+
+Vào tab Desktop → PC Wireless
+
+Click Connect đến SSID MyWiFi
+
+Nhập pass phrase: 12345678
+
+Sau đó Laptop sẽ:
+
+Gán IP tự động (nếu DHCP bật)
+
+Hoặc tự nhập IP tĩnh: 192.168.1.10, Gateway 192.168.1.1
 ##   NOTE
 ### Vlan
 chỉ mặc định cho vlan 10, những vlan còn lại cấm
