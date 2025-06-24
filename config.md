@@ -342,6 +342,28 @@ switchport access vlan 70
 no shutdown
 end
 ```
+## Cấu hình NAT Overload (PAT)
+### R1
+```
+ena
+conf t
+
+interface G0/1.10
+ip nat inside
+interface G0/1.20
+ip nat inside
+
+interface G0/0
+ ip nat outside
+exit
+
+access-list 1 permit 192.168.10.0 0.0.0.255
+access-list 1 permit 192.168.20.0 0.0.0.255
+
+ip nat inside source list 1 interface G0/0 overload
+ip route 0.0.0.0 0.0.0.0 192.168.1.1
+end
+```
 ##   NOTE
 ### Vlan
 chỉ mặc định cho vlan 10, những vlan còn lại cấm
