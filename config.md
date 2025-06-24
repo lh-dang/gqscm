@@ -1,4 +1,4 @@
-## config ip address
+## config ip addressMore actions
 ### R0
 ```
 ena
@@ -63,7 +63,167 @@ end
 
 ### R1
 ```
-en50
+ena
+conf t
+router ospf 1
+network 192.168.1.0 0.0.0.255 area 0
+end
+```
+
+### R2
+```
+ena
+conf t
+router ospf 1
+network 192.168.2.0 0.0.0.255 area 0
+end
+```
+
+### R3
+```
+ena
+conf t
+router ospf 1
+network 192.168.3.0 0.0.0.255 area 0
+end
+```
+### check ospf config
+```
+show ip ospf neighbor         → Xem OSPF đã hình thành láng giềng chưa
+show ip route ospf            → Kiểm tra các route học được qua OSPF
+show ip protocols             → Xác nhận cấu hình OSPF
+show ip ospf interface brief  → Xem interface nào đang chạy OSPF
+```
+## config vlan
+R1
+```
+ena
+conf t
+int g0/1
+no shut
+exit
+int g0/1.10
+encapsulation dot1Q 10
+ip address 192.168.10.1 255.255.255.0
+exit
+int g0/1.20
+encapsulation dot1Q 20
+ip address 192.168.20.1 255.255.255.0
+end
+```
+R2
+```
+ena
+conf t
+int g0/1
+no shut
+exit
+int g0/1.30
+encapsulation dot1Q 30
+ip address 192.168.30.1 255.255.255.0
+exit
+int g0/1.40
+encapsulation dot1Q 40
+ip address 192.168.40.1 255.255.255.0
+exit
+int g0/1.50
+encapsulation dot1Q 50
+ip address 192.168.50.1 255.255.255.0
+end
+```
+R2
+```
+ena
+conf t
+int g0/1
+no shut
+int g0/2
+no shut
+exit
+int g0/1.60
+encapsulation dot1Q 60
+ip address 192.168.60.1 255.255.255.0
+exit
+int g0/2.70
+encapsulation dot1Q 70
+ip address 192.168.70.1 255.255.255.0
+end
+```
+SW1
+```
+ena
+conf t
+hostname SW1
+vlan 10
+vlan 20
+exit 
+interface fa0/1
+switchport mode trunk
+switchport trunk allowed vlan 10,20
+no shutdown
+interface fa0/2
+switchport mode trunk
+switchport trunk allowed vlan 10
+no shutdown
+interface fa0/3
+switchport mode trunk
+switchport trunk allowed vlan 20
+no shutdown
+end
+```
+SW3
+```
+ena
+conf t
+hostname SW3
+vlan 10
+
+! Cổng nối đến Switch1
+int fa0/1
+switchport mode trunk
+switchport trunk allowed vlan 10
+no shutdown
+
+! Cổng nối đến PC1
+int fa0/3
+switchport mode access
+switchport access vlan 10
+no shutdown
+
+! Cổng nối đến PC2
+int fa0/4
+switchport mode access
+switchport access vlan 10
+no shutdown
+end
+```
+SW4
+```
+ena
+conf t
+hostname SW4
+vlan 20
+
+! Cổng nối đến Switch1
+int fa0/1
+switchport mode trunk
+switchport trunk allowed vlan 20
+no shutdown
+
+! Cổng nối đến PC1
+int fa0/3
+switchport mode access
+switchport access vlan 20
+no shutdown
+
+! Cổng nối đến PC2
+int fa0/4
+switchport mode access
+switchport access vlan 20
+no shutdown
+end
+```
+SW2 - Chú ý vlan 50
 ```
 ena
 conf t
