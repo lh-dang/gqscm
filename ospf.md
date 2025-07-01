@@ -22,7 +22,10 @@ show running-config | section ospf
 show ip route ospf
 show ip ospf neighbor
 ```
-
+### Kiểm tra 1 cổng cụ thể
+```
+show ip ospf interface GigabitEthernet0/0
+```
 ### CẤU HÌNH LẠI
 R1
 ```
