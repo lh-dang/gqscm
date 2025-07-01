@@ -401,6 +401,33 @@ network 192.168.60.0 0.0.0.255 area 0
 network 192.168.70.0 0.0.0.255 area 0
 end
 ```
+## Cấu hình ssh đến router
+### R1
+```
+enable
+configure terminal
+hostname R1
+ip domain-name mynet.local
+
+username admin privilege 15 secret 123456
+
+crypto key generate rsa
+# Gõ 1024 khi được hỏi
+
+ip ssh version 2
+
+interface g0/0.10
+ip address 192.168.10.1 255.255.255.0
+no shutdown
+
+line vty 0 4
+login local
+transport input ssh
+```
+### PC0
+```
+ssh -l admin 192.168.10.1
+```
 ## Cấu hình Access_point-PT
 📡 2. Cấu hình Access Point (AC-PT):
 Bấm vào Access Point
