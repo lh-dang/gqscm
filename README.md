@@ -1,1 +1,1 @@
-# gqscm
+# GIAI QUYET SU CO MANG
